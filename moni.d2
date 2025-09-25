@@ -1,0 +1,36 @@
+direction: left
+
+zabbix: {
+  zabbix_db: pgsql: {shape: cylinder}
+  zabbix_server: zserver: {shape: rectangle}
+  zabbix_server <-> zabbix_db
+}
+
+prod: {
+  zproxy_db: mysql: {shape: cylinder}
+  zproxy_server: zproxy: {shape: rectangle}
+  zproxy_server <-> zproxy_db
+}
+
+preprod: {
+  zproxy_db: mysql: {shape: cylinder}
+  zproxy_server: zproxy: {shape: rectangle}
+  zproxy_server <-> zproxy_db
+}
+
+test: {
+  zproxy_db: mysql: {shape: cylinder}
+  zproxy_server: zproxy: {shape: rectangle}
+  zproxy_server <-> zproxy_db
+}
+
+dev: {
+  zproxy_db: mysql: {shape: cylinder}
+  zproxy_server: zproxy: {shape: rectangle}
+  zproxy_server <-> zproxy_db
+}
+
+zabbix.zabbix_server <-> prod.zproxy_server
+zabbix.zabbix_server <-> preprod.zproxy_server
+zabbix.zabbix_server <-> test.zproxy_server
+zabbix.zabbix_server <-> dev.zproxy_server
