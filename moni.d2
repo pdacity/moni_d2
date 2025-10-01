@@ -42,18 +42,6 @@ preprod: Preprod stage {
   hardware -> zproxy_server
 }
 
-test: Test stage {
-  zproxy_db: mysql: {shape: cylinder}
-  zproxy_server: zproxy: {shape: rectangle}
-  hardware: Hardwaren and services {shape: rectangle}
-  # prom
-  apps: Application and services {shape: cloud}
-  prom_exporter: exporters
-  prom_exporter <- apps
-  zproxy_server <-> zproxy_db
-  hardware -> zproxy_server
-}
-
 dev: {
   zproxy_db: mysql: {shape: cylinder}
   zproxy_server: zproxy: {shape: rectangle}
@@ -84,7 +72,6 @@ office: Office space {
 # Stage to zabbix
 zabbix.zabbix_server <-> prod.zproxy_server
 zabbix.zabbix_server <-> preprod.zproxy_server
-zabbix.zabbix_server <-> test.zproxy_server
 zabbix.zabbix_server <-> dev.zproxy_server
 zabbix.zabbix_server -> office.zproxy_server: {style: {stroke: red}}
 
@@ -95,5 +82,7 @@ zabbix.zabbix_server <-> prom.prom_server
 prod.prom_exporter -> prom.prom_server
 preprod.prom_exporter -> prom.prom_server
 dev.prom_exporter -> prom.prom_server
-test.prom_exporter -> prom.prom_server
 office.prom_exporter_proxy -> prom.prom_server: {style: {stroke: red}}
+
+prom.prom_server -> prom.on_call
+zabbix.zabbix_server -> prom.on_call
