@@ -17,6 +17,13 @@ prom: Prometheus server {
   prom_exporter -> prom_server
 }
 
+prom.on_call: Prometheus OnCall {
+  grid-rows: 2
+  Deduplication
+  Hierarchy
+  Alert transport.width: 400
+}
+
 prod: Production stage {
   # zabbix 
   zproxy_db: mysql: {shape: cylinder}
