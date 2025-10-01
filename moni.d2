@@ -84,5 +84,15 @@ preprod.prom_exporter -> prom.prom_server
 dev.prom_exporter -> prom.prom_server
 office.prom_exporter_proxy -> prom.prom_server: {style: {stroke: red}}
 
-prom.prom_server -> prom.on_call
-zabbix.zabbix_server -> prom.on_call
+prom.prom_server -> prom.on_call: {
+  style: {
+    animated: true
+    stroke: green
+  }
+}
+zabbix.zabbix_server -> prom.on_call: {
+  style: {
+    animated: true
+    stroke: green
+  }
+}
